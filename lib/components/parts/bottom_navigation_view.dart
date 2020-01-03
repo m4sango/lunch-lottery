@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lunch_lottery/resources/colors.dart';
 
 import 'lottery_icon.dart';
 
@@ -29,7 +30,7 @@ class _BottomNavigationViewState extends State<BottomNavigationView> {
 
   /// アイコンのタイトルテキストのリスト
   static const List<String> _titleNameList = [
-    "List",
+    "Shop",
     "Lottery",
     "Rank",
   ];
@@ -39,12 +40,12 @@ class _BottomNavigationViewState extends State<BottomNavigationView> {
     super.initState();
     _navigationBarItemList = <BottomNavigationBarItem>[
       BottomNavigationBarItem(
-        icon: Icon(Icons.format_list_bulleted),
+        icon: Icon(Icons.store),
         title: Text(
           _titleNameList[0],
           style: titleStyle,
         ),
-        backgroundColor: Colors.lightGreen,
+        backgroundColor: AppColors.barColor,
       ),
       BottomNavigationBarItem(
         icon: LotteryIcon(24, 24, Colors.white),
@@ -52,7 +53,7 @@ class _BottomNavigationViewState extends State<BottomNavigationView> {
           _titleNameList[1],
           style: titleStyle,
         ),
-        backgroundColor: Colors.lightGreen,
+        backgroundColor: AppColors.barColor,
       ),
       BottomNavigationBarItem(
         icon: Icon(Icons.format_list_numbered),
@@ -60,7 +61,7 @@ class _BottomNavigationViewState extends State<BottomNavigationView> {
           _titleNameList[2],
           style: titleStyle,
         ),
-        backgroundColor: Colors.lightGreen,
+        backgroundColor: AppColors.barColor,
       ),
     ];
   }

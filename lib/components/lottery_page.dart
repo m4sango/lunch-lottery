@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lunch_lottery/components/parts/lottery_icon.dart';
+import 'package:lunch_lottery/resources/colors.dart';
 
 /// 抽選画面
 class LotteryPage extends StatelessWidget {
@@ -25,7 +26,9 @@ class _LotteryButton extends StatelessWidget {
       child: Center(
         child: Ink(
           decoration: const ShapeDecoration(
-              color: Colors.lightGreen, shape: CircleBorder()),
+            color: AppColors.barColor,
+            shape: CircleBorder(),
+          ),
           child: IconButton(
             iconSize: 300,
             icon: LotteryIcon(200, 200, Colors.black),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lunch_lottery/components/ranking_page.dart';
 import 'package:lunch_lottery/components/shop_list_page.dart';
+import 'package:lunch_lottery/resources/colors.dart';
 
 import 'components/lottery_page.dart';
 import 'components/parts/bottom_navigation_view.dart';
@@ -35,6 +36,9 @@ class _LotteryAppState extends State<LotteryApp> {
     return MaterialApp(
       title: '昼飯決めるアプリ',
       home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: AppColors.barColor,
+        ),
         body: PageView(
           controller: _pageController,
           children: <Widget>[
