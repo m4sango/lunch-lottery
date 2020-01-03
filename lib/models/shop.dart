@@ -2,7 +2,7 @@
 /// SQLiteで保存することを想定
 class Shop {
   /// 一意なID
-  final int shopId;
+  final int id;
 
   /// 店名
   final String shopName;
@@ -13,14 +13,21 @@ class Shop {
   /// 来店回数
   final int visitNum;
 
-  Shop(this.shopId, this.shopName, this.category, this.visitNum);
+  Shop(this.id, this.shopName, this.category, this.visitNum);
+
+
 
   Map<String, dynamic> toMap() {
     return {
-      "shopId": shopId,
+      "id": id,
       "shopName": shopName,
       "category": category,
       "visitNum": visitNum,
     };
+  }
+
+  @override
+  String toString() {
+    return "Shop{id: $id, shopName: $shopName, category: $category, visitNum: $visitNum}";
   }
 }

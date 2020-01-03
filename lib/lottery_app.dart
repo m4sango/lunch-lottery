@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lunch_lottery/components/ranking_page.dart';
+import 'package:lunch_lottery/components/shop_detail_page.dart';
 import 'package:lunch_lottery/components/shop_list_page.dart';
 import 'package:lunch_lottery/resources/colors.dart';
 
@@ -42,7 +43,7 @@ class _LotteryAppState extends State<LotteryApp> {
         body: PageView(
           controller: _pageController,
           children: <Widget>[
-            ShopListPage(),
+            ShopDetailPage(),
             LotteryPage(),
             RankingPage(),
           ],
