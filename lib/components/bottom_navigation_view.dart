@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lunch_lottery/components/lottery_icon.dart';
 
 /// ボトムナビゲーションバー
 class BottomNavigationView extends StatefulWidget {
@@ -9,6 +10,7 @@ class BottomNavigationView extends StatefulWidget {
 }
 
 class _BottomNavigationViewState extends State<BottomNavigationView> {
+  /// 選択中のアイコンの番号
   int _selectedIndex = 1;
 
   /// アイコンのタイトルテキストのStyle
@@ -16,15 +18,35 @@ class _BottomNavigationViewState extends State<BottomNavigationView> {
     fontWeight: FontWeight.bold,
   );
 
+  /// アイコンのタイトルテキストのリスト
+  static const List<String> _titleNameList = [
+    "List",
+    "Lottery",
+    "Rank",
+  ];
+
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       items: <BottomNavigationBarItem>[
         _createBottomNavigationBarItem(
-            Icons.format_list_bulleted, Text("List")),
-        _createBottomNavigationBarItem(Icons.home, Text("Home")),
+            Icon(Icons.format_list_bulleted),
+            Text(
+              _titleNameList[0],
+              style: titleStyle,
+            )),
         _createBottomNavigationBarItem(
-            Icons.format_list_numbered, Text("ranking")),
+            LotteryIcon(24, 24),
+            Text(
+              _titleNameList[1],
+              style: titleStyle,
+            )),
+        _createBottomNavigationBarItem(
+            Icon(Icons.format_list_numbered),
+            Text(
+              _titleNameList[2],
+              style: titleStyle,
+            )),
       ],
       currentIndex: _selectedIndex,
       selectedItemColor: Colors.amber[800],
@@ -32,14 +54,16 @@ class _BottomNavigationViewState extends State<BottomNavigationView> {
     );
   }
 
+  /// ナビゲーションバーのアイテムを生成
   BottomNavigationBarItem _createBottomNavigationBarItem(
-      IconData icon, Text title) {
+      Widget icon, Text title) {
     return BottomNavigationBarItem(
-      icon: Icon(icon),
+      icon: icon,
       title: title,
     );
   }
 
+  /// アイテムタップ時の動作
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
