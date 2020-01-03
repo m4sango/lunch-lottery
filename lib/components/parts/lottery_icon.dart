@@ -8,8 +8,9 @@ class LotteryIcon extends StatelessWidget {
 
   final double width;
   final double height;
+  final Color color;
 
-  LotteryIcon(this.width, this.height);
+  LotteryIcon(this.width, this.height, this.color);
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +18,7 @@ class LotteryIcon extends StatelessWidget {
       _lotteryAssetsPath,
       width: this.width,
       height: this.height,
+      color: color,
     );
   }
 }
