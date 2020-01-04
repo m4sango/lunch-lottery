@@ -39,30 +39,35 @@ class ShopDetailPageState extends State<ShopDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  _shopPhoto(),
-                  Padding(padding: EdgeInsets.only(right: 16)),
-                  Flexible(
-                    child: _shopNameField(),
-                  ),
-                ],
-              ),
-              Padding(padding: EdgeInsets.only(top: 16)),
-              _categoryField(),
-              Padding(padding: EdgeInsets.only(top: 16)),
-              _visitNumField(),
-              Padding(padding: EdgeInsets.only(top: 16)),
-              _saveButton(),
-            ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("お店詳細"),
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    _shopPhoto(),
+                    Padding(padding: EdgeInsets.only(right: 16)),
+                    Flexible(
+                      child: _shopNameField(),
+                    ),
+                  ],
+                ),
+                Padding(padding: EdgeInsets.only(top: 16)),
+                _categoryField(),
+                Padding(padding: EdgeInsets.only(top: 16)),
+                _visitNumField(),
+                Padding(padding: EdgeInsets.only(top: 16)),
+                _saveButton(),
+              ],
+            ),
           ),
         ),
       ),
@@ -163,9 +168,9 @@ class ShopDetailPageState extends State<ShopDetailPage> {
               }
 
               Scaffold.of(context)
-                  .showSnackBar(SnackBar(content: Text('Processing Data')));
+                  .showSnackBar(SnackBar(content: Text('保存しました')));
 
-              // TODO: 画面戻る
+              Navigator.pop(context);
             },
       child: Text(
         "保存",

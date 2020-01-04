@@ -1,90 +1,68 @@
 import 'package:flutter/material.dart';
+import 'package:lunch_lottery/models/tab_item.dart';
 import 'package:lunch_lottery/resources/colors.dart';
 
 import 'lottery_icon.dart';
 
 /// ボトムナビゲーションバー
-class BottomNavigationView extends StatefulWidget {
-  final PageController _pageController;
+class BottomNavigationView extends StatelessWidget {
+  final TabItem _currentTab;
+  final ValueChanged<TabItem> _onSelectTab;
 
-  BottomNavigationView(this._pageController);
+  /// タブタイトル
+  final Map<TabItem, String> _tabName = {
+    TabItem.shop: "Shop",
+    TabItem.lottery: "Lottery",
+    TabItem.ranking: "Rank",
+  };
 
-  @override
-  _BottomNavigationViewState createState() =>
-      _BottomNavigationViewState(_pageController);
-}
+  /// タブアイコン
+  Map<TabItem, Widget> _tabIcon;
 
-class _BottomNavigationViewState extends State<BottomNavigationView> {
-  /// 選択中のアイコンの番号
-  int _currentIndex = 1;
-  BottomNavigationBarType _type = BottomNavigationBarType.shifting;
-  List<BottomNavigationBarItem> _navigationBarItemList;
-  PageController _pageController;
-
-  _BottomNavigationViewState(this._pageController);
-
-  /// アイコンのタイトルテキストのStyle
-  static const TextStyle titleStyle = TextStyle(
-    fontWeight: FontWeight.bold,
-  );
-
-  /// アイコンのタイトルテキストのリスト
-  static const List<String> _titleNameList = [
-    "Shop",
-    "Lottery",
-    "Rank",
-  ];
-
-  @override
-  void initState() {
-    super.initState();
-    _navigationBarItemList = <BottomNavigationBarItem>[
-      BottomNavigationBarItem(
-        icon: Icon(Icons.store),
-        title: Text(
-          _titleNameList[0],
-          style: titleStyle,
-        ),
-        backgroundColor: AppColors.barColor,
-      ),
-      BottomNavigationBarItem(
-        icon: LotteryIcon(24, 24, Colors.white),
-        title: Text(
-          _titleNameList[1],
-          style: titleStyle,
-        ),
-        backgroundColor: AppColors.barColor,
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.format_list_numbered),
-        title: Text(
-          _titleNameList[2],
-          style: titleStyle,
-        ),
-        backgroundColor: AppColors.barColor,
-      ),
-    ];
-  }
+  BottomNavigationView(this._currentTab, this._onSelectTab);
 
   @override
   Widget build(BuildContext context) {
+    _tabIcon = {
+      TabItem.shop: Icon(
+        Icons.store,
+        color: _colorTabMatching(TabItem.shop),
+      ),
+      TabItem.lottery: LotteryIcon(24, 24, _colorTabMatching(TabItem.lottery)),
+      TabItem.ranking: Icon(
+        Icons.format_list_numbered,
+        color: _colorTabMatching(TabItem.ranking),
+      ),
+    };
+
     return BottomNavigationBar(
-      items: _navigationBarItemList,
-      currentIndex: _currentIndex,
-      type: _type,
-      onTap: _onItemTapped,
+      elevation: 64,
+      items: [
+        _buildItem(TabItem.shop),
+        _buildItem(TabItem.lottery),
+        _buildItem(TabItem.ranking),
+      ],
+      type: BottomNavigationBarType.fixed,
+      currentIndex: 1,
+      onTap: (index) => _onSelectTab(TabItem.values[index]),
     );
   }
 
-  /// アイテムタップ時の動作
-  void _onItemTapped(int index) {
-    setState(() {
-      _pageController.animateToPage(
-        index,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.ease,
-      );
-      _currentIndex = index;
-    });
+  BottomNavigationBarItem _buildItem(TabItem tabItem) {
+    return BottomNavigationBarItem(
+      icon: _tabIcon[tabItem],
+      title: Text(
+        _tabName[tabItem],
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: _colorTabMatching(tabItem),
+        ),
+      ),
+      backgroundColor: AppColors.barColor,
+    );
+  }
+
+  Color _colorTabMatching(TabItem item) {
+    return _currentTab == item ? AppColors.barColor : Colors.grey;
   }
 }
