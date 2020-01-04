@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lunch_lottery/components/parts/lottery_icon.dart';
 import 'package:lunch_lottery/models/shop.dart';
 import 'package:lunch_lottery/repository/shop_repository.dart';
+import 'package:lunch_lottery/resources/colors.dart';
 
 /// 店舗詳細画面
 class ShopDetailPage extends StatefulWidget {
@@ -20,6 +21,7 @@ class ShopDetailPageState extends State<ShopDetailPage> {
   final Shop _currentData;
   bool _isSaveButtonEnabled;
   final _formKey = GlobalKey<FormState>();
+  final List<String> _categoryNameList = <String>["和食", "中華", "洋食", "その他"];
 
   // 入力値
   String _shopName;
@@ -32,7 +34,7 @@ class ShopDetailPageState extends State<ShopDetailPage> {
   void initState() {
     super.initState();
     _shopName = _currentData?.shopName ?? "";
-    _category = _currentData?.category;
+    _category = _currentData?.category ?? _categoryNameList.last;
     _visitNum = _currentData?.visitNum ?? 0;
     _isSaveButtonEnabled = _currentData != null ? true : false;
   }
@@ -42,6 +44,7 @@ class ShopDetailPageState extends State<ShopDetailPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("お店詳細"),
+        backgroundColor: AppColors.barColor,
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -109,11 +112,9 @@ class ShopDetailPageState extends State<ShopDetailPage> {
 
   /// カテゴリフィールド
   Widget _categoryField() {
-    List<String> _categoryNameList = <String>["和食", "中華", "洋食", "その他"];
-
     return DropdownButton<String>(
       isExpanded: true,
-      value: _category ?? _categoryNameList.last,
+      value: _category,
       icon: Icon(Icons.arrow_downward),
       elevation: 16,
       style: TextStyle(color: Colors.deepPurple),
