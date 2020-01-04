@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lunch_lottery/components/ranking_page.dart';
 import 'package:lunch_lottery/components/shop_detail_page.dart';
-import 'package:lunch_lottery/components/shop_list_page.dart';
 import 'package:lunch_lottery/resources/colors.dart';
 
 import 'components/lottery_page.dart';

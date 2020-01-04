@@ -14,8 +14,12 @@ class Shop {
   final int visitNum;
 
   Shop(this.id, this.shopName, this.category, this.visitNum);
-
-
+  
+  Shop.insert(String shopName, String category)
+      : this.id = null,
+        this.shopName = shopName,
+        this.category = category,
+        this.visitNum = 0;
 
   Map<String, dynamic> toMap() {
     return {
